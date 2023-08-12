@@ -1,0 +1,56 @@
+BRUTE FORCE 
+TC-O(N) SC-O(N)
+class Solution {
+
+public:
+    
+         
+    void rotate(vector<int>&nums ,int k )
+    {
+ int n = nums.size();
+    vector<int>ans(n,0);
+        for(int i =n-k; i<n;i++)
+            
+        {
+           ans[i-(n-k)] =nums[i]; \\ 5 6 7 0 0 0 0
+        }
+        for(int i=k;i<n;i++){
+            ans[i]=nums[i-k]; \\ 5 6 7 1 2 3 4 
+        }
+        for(int i=0;i<n;i++)
+        {
+            nums[i]=ans[i]; \\ COPY ans array to nums 
+        }
+    }
+};
+  
+
+
+
+
+OPTIMISED APPROACH 
+class Solution {
+public: //TC->  0(N)
+    // SC ->0(1)
+         
+    void reverse (vector<int>&nums ,int start , int end )
+    {
+        while (start<end)
+        {
+            swap(nums[start], nums[end ]);
+          start++;
+           end--;
+        }
+    }
+    void rotate(vector<int>& nums, int k) {
+                     
+      k=k%nums.size();  // if K=10 then it  is after 7 time it give same array so we //repeated many time after  K=k%n its only give how many time to rotate its remove th //repetition
+		//reverse first partion
+        reverse(nums,0,nums.size()-k-1);
+		//rverse last partiton
+        reverse(nums,nums.size()-k,nums.size()-1);
+		//reverse the whole vector
+        reverse(nums,0,nums.size()-1);
+       
+    }
+};
